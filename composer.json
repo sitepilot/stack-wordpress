@@ -11,8 +11,7 @@
   ],
   "require": {},
   "scripts": {
-    "post-update-cmd": [
-      "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+    "post-create-project-cmd": [
       "docker compose run app wp core download"
     ]
   }
