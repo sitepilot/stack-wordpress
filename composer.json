@@ -1,0 +1,19 @@
+{
+  "name": "sitepilot/stack-wordpress",
+  "description": "WordPress development stack.",
+  "type": "project",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Sitepilot",
+      "email": "support@sitepilot.io"
+    }
+  ],
+  "require": {},
+  "scripts": {
+    "post-update-cmd": [
+      "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+      "docker compose run app wp core download"
+    ]
+  }
+}

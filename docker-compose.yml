@@ -1,0 +1,24 @@
+services:
+  app:
+    image: ghcr.io/sitepilot/php-ols:${STACK_PHP_VERSION:-8.3}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME:?}.tls=true"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME:?}.rule=HostRegexp(`${COMPOSE_PROJECT_NAME:?}.{any:.+}`)"
+    volumes:
+      - './:/app/files'
+    networks:
+      - default
+      - stack
+
+  mysql:
+    image: mysql:8
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-app}
+      MYSQL_USER: ${MYSQL_USER:-app}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-secret}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-supersecret}
+
+networks:
+  stack:
+    external: true
