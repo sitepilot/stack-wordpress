@@ -13,6 +13,7 @@
   "scripts": {
     "post-create-project-cmd": [
       "docker compose up -d",
+      "docker compose exec --user=root app chown app /app/files",
       "docker compose exec app wp core download",
       "docker compose exec app wp config create --dbhost=mysql --dbname=app --dbuser=app --dbpass=secret"
     ]
